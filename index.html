@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>For Annu 💖</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{width:100%;height:100%;overflow:hidden;background:#050010;font-family:Georgia,serif}
+.page{position:fixed;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;z-index:10}
+.page.active{display:flex}
+#p1bg{position:fixed;inset:0;z-index:1}
+#p2bg{position:fixed;inset:0;z-index:2}
+#countdown{position:relative;z-index:20;font-size:45vw;font-weight:900;color:transparent;background:linear-gradient(45deg,#ff69b4,#ff1493,#ffd700,#ff69b4);-webkit-background-clip:text;background-clip:text;line-height:1;filter:drop-shadow(0 0 30px #ff1493);animation:throb .8s ease-in-out infinite}
+@keyframes throb{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}
+#msg1{position:relative;z-index:20;font-size:clamp(16px,5.5vw,38px);text-align:center;padding:24px 20px;font-weight:bold;opacity:0;line-height:1.7;background:linear-gradient(45deg,#ff69b4,#ffd700,#ff1493);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+#page1{z-index:5;background:radial-gradient(ellipse at center,#1a0030,#05000f)}
+#page2{z-index:5;background:transparent}
+#page3{z-index:5;background:radial-gradient(ellipse at center,#150025,#050010);padding:20px;gap:14px;overflow-y:auto}
+.p2w{position:relative;z-index:20;display:flex;flex-direction:column;align-items:center;gap:16px;padding:20px;text-align:center}
+#gmt{font-size:clamp(30px,9vw,80px);font-weight:900;background:linear-gradient(45deg,#ff69b4,#ff1493,#ffd700,#ff69b4);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;opacity:0;transform:scale(0.3) rotate(-10deg);line-height:1.2}
+#gms{font-size:clamp(13px,3.5vw,24px);color:#ffe4f7;opacity:0;letter-spacing:3px;font-weight:600;text-shadow:0 0 15px rgba(255,105,180,.8)}
+#gmh{font-size:clamp(20px,5vw,38px);opacity:0;letter-spacing:6px}
+#bcam{padding:15px 36px;background:linear-gradient(135deg,#ff1493,#ff69b4);border:none;border-radius:50px;color:#fff;font-size:clamp(14px,3.5vw,20px);font-weight:bold;cursor:pointer;box-shadow:0 0 30px rgba(255,20,147,.6);opacity:0;transform:translateY(40px);letter-spacing:2px}
+#p3t{font-size:clamp(18px,5.5vw,34px);color:#ff69b4;font-weight:900;text-align:center;text-shadow:0 0 20px rgba(255,105,180,.9);letter-spacing:2px}
+#camw{position:relative;width:min(88vw,400px);height:min(68vw,310px);border-radius:20px;overflow:hidden;border:3px solid #ff69b4;box-shadow:0 0 40px rgba(255,20,147,.5),0 0 80px rgba(255,20,147,.2)}
+#vid{width:100%;height:100%;object-fit:cover;transform:scaleX(-1)}
+#ovc{position:absolute;inset:0;transform:scaleX(-1)}
+#comp{background:linear-gradient(135deg,rgba(255,20,147,.12),rgba(255,105,180,.08));border:1.5px solid rgba(255,105,180,.35);border-radius:18px;padding:14px 18px;color:#fff;font-size:clamp(13px,3.2vw,18px);text-align:center;max-width:90vw;min-height:56px;display:flex;align-items:center;justify-content:center;line-height:1.6;font-weight:500;backdrop-filter:blur(10px);transition:all .5s ease}
+#stat{color:rgba(255,190,220,.65);font-size:clamp(10px,2.3vw,13px);text-align:center}
+.sp{position:fixed;pointer-events:none;z-index:999;font-size:22px;animation:fly 1.4s ease-out forwards}
+@keyframes fly{0%{opacity:1;transform:translate(0,0) scale(1)}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(0)}}
+#ldr{position:fixed;inset:0;background:#050010;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:1000;gap:16px}
+#ltx{color:#ff69b4;font-size:clamp(16px,5vw,22px);font-weight:bold;letter-spacing:3px;text-shadow:0 0 20px rgba(255,105,180,.8)}
+#lbb{width:min(70vw,250px);height:6px;background:rgba(255,255,255,.08);border-radius:10px;overflow:hidden}
+#lb{height:100%;width:0;background:linear-gradient(90deg,#ff1493,#ffd700,#ff69b4);border-radius:10px;transition:width .4s}
+#lsb{color:rgba(255,200,230,.45);font-size:12px;text-align:center}
+#bk{position:fixed;top:14px;left:14px;z-index:500;padding:8px 18px;background:rgba(255,20,147,.15);border:1px solid rgba(255,105,180,.5);border-radius:20px;color:#ff69b4;font-size:13px;cursor:pointer;backdrop-filter:blur(10px);display:none}
+</style>
+</head>
+<body>
+
+<div id="ldr">
+  <div style="font-size:50px;animation:throb 1s infinite">💖</div>
+  <div id="ltx">Loading Magic...</div>
+  <div id="lbb"><div id="lb"></div></div>
+  <div id="lsb">Preparing something special for Annu ✨</div>
+</div>
+
+<button id="bk" onclick="goBack()">← Back</button>
+<canvas id="p1bg"></canvas>
+
+<div class="page active" id="page1">
+  <div id="countdown">3</div>
+  <div id="msg1">Hello Cutii Annu! 😏<br>Bhaw Jada Bhad Gya Hai! 💖🔥</div>
+</div>
+
+<div class="page" id="page2">
+  <canvas id="p2bg"></canvas>
+  <div class="p2w">
+    <div id="gmt">Good Morning<br>Cutie Pii! ☀️</div>
+    <div id="gms">💕 Tera Din Sundar Ho Jaaye 💕</div>
+    <div id="gmh">💖 💗 💓 💝 💞 💗 💖</div>
+    <button id="bcam" onclick="openCamera()">📸 Annu ka Mirror Kholein</button>
+  </div>
+</div>
+
+<div class="page" id="page3">
+  <div id="p3t">✨ Annu Ji Ka Aaina ✨</div>
+  <div id="camw">
+    <video id="vid" autoplay muted playsinline></video>
+    <canvas id="ovc"></canvas>
+  </div>
+  <div id="comp">Annu ji... detecting your cuteness! 💖</div>
+  <div id="stat">Loading AI magic... 🔮</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.4/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@vladmandic/face-api/dist/face-api.js"></script>
+<script>
+'use strict';
+/* ── GLOBALS ── */
+let p1r,p1s,p1c,p1pts,p1id,p2r,p2s,p2c,p2id,p2os=[],p3id;
+let faceOk=false,lastSpkTime=0,lastMsg='',curPg=1;
+let speakTimer=null,kaInterval=null;
+
+/* ══════════════════════════════════════════
+   SPEECH ENGINE — FULLY FIXED FOR ANDROID
+   ══════════════════════════════════════════ */
+
+// Strip emojis & symbols that confuse TTS engines
+function cleanTTS(s){
+  return s
+    .replace(/[\u{1F300}-\u{1FAFF}]/gu,'')   // emoji block 1
+    .replace(/[\u{2600}-\u{27BF}]/gu,'')       // misc symbols
+    .replace(/[\u{FE00}-\u{FEFF}]/gu,'')       // variation selectors
+    .replace(/[!]{2,}/g,'!')
+    .replace(/[.]{2,}/g,'.')
+    .replace(/\s{2,}/g,' ')
+    .trim();
+}
+
+// Android keepalive — prevents Chrome stall bug
+function kaStart(){
+  kaStop();
+  kaInterval=setInterval(()=>{
+    if(window.speechSynthesis&&speechSynthesis.speaking){
+      speechSynthesis.pause();
+      setTimeout(()=>speechSynthesis.resume(),50);
+    }
+  },8000);
+}
+function kaStop(){if(kaInterval){clearInterval(kaInterval);kaInterval=null;}}
+
+// Central speak function — safe, debounced, emoji-clean
+function speak(raw,delay=0,rate=0.9,pitch=1.05){
+  if(!('speechSynthesis' in window))return;
+  clearTimeout(speakTimer);
+  speakTimer=setTimeout(()=>{
+    speechSynthesis.cancel();
+    kaStop();
+    const clean=cleanTTS(raw);
+    if(!clean||clean.length<2)return;
+    // Small buffer after cancel() — needed on Android
+    setTimeout(()=>{
+      const u=new SpeechSynthesisUtterance(clean);
+      u.lang='hi-IN';
+      u.rate=Math.min(Math.max(rate,0.5),1.5);
+      u.pitch=Math.min(Math.max(pitch,0.5),2);
+      u.volume=1;
+      const vs=speechSynthesis.getVoices();
+      const v=vs.find(x=>x.lang.startsWith('hi-IN'))
+             ||vs.find(x=>x.lang.startsWith('hi'))
+             ||vs.find(x=>/female|samantha|victoria|karen/i.test(x.name))
+             ||null;
+      if(v)u.voice=v;
+      u.onstart=kaStart;
+      u.onend=kaStop;
+      u.onerror=kaStop;
+      speechSynthesis.speak(u);
+    },200);
+  },delay);
+}
+
+/* ══════════════════
+   COMPLIMENT DATA
+   Each entry: {d: display text (with emoji), s: speak text (clean)}
+   ══════════════════ */
+const CMP={
+  happy:[
+    {d:"Wah Annu! Tumhari smile best smile in the world hai! 😍✨",s:"Wah Annu! Tumhari smile duniya ki best smile hai!"},
+    {d:"Itna pyara smile! Annu tum literally sunshine ho! ☀️💖",s:"Itna pyara smile! Annu tum literally sunshine ho!"},
+    {d:"Annu jab hansti ho, stars bhi jealous ho jaate hain! 🌟💕",s:"Annu jab hansti ho, stars bhi jealous ho jaate hain!"},
+    {d:"That smile just made my heart go BOOM! 10/10 Annu! 💗",s:"That smile just made my heart go BOOM! 10 out of 10 Annu!"},
+    {d:"Hahaha! Yeh wali smile save karna chahta hun! Annu you're adorable! 🌸",s:"Hahaha! Yeh wali smile save karna chahta hun! Annu you are adorable!"}
+  ],
+  neutral:[
+    {d:"Annu bina smile ke bhi absolutely stunning lag rahi ho! 💫",s:"Annu bina smile ke bhi absolutely stunning lag rahi ho!"},
+    {d:"Serious mode bhi itna cute? Yaar yeh unfair hai! 😤💖",s:"Serious mode bhi itna cute? Yaar yeh unfair hai!"},
+    {d:"Default mode mein bhi Annu is 100% gorgeous! 👑",s:"Default mode mein bhi Annu is 100 percent gorgeous!"},
+    {d:"Annu tumhara face hi itna perfect hai, expressions ki zaroorat nahi! 💎",s:"Annu tumhara face hi itna perfect hai, expressions ki zaroorat nahi!"},
+    {d:"Neutral Annu = Still the most beautiful! That's Annu power! 🌸",s:"Neutral Annu equals still the most beautiful! Yahi hai Annu power!"}
+  ],
+  sad:[
+    {d:"Aye Annu! Mat ro! Tum bahut cute ho, aansu suit nahi karta! 💞",s:"Aye Annu! Mat ro! Tum bahut cute ho, aansu suit nahi karta!"},
+    {d:"Annu please ek baar smile do! Tumhari smile se mera din ban jaata hai! ☀️💕",s:"Annu please ek baar smile do! Tumhari smile se mera din ban jaata hai!"},
+    {d:"Kya hua Annu? Whatever it is, you're still the most beautiful! 🤗💖",s:"Kya hua Annu? Whatever it is, you are still the most beautiful!"},
+    {d:"Cheer up Cutii! You deserve all the happiness! 🌈💕",s:"Cheer up Cutii! You deserve all the happiness!"},
+    {d:"Annu sad mat hono! Tum bahut precious ho! 💖✨",s:"Annu sad mat hono! Tum bahut precious ho!"}
+  ],
+  surprised:[
+    {d:"OMG Annu! Even surprised you look AMAZING! 😱💖",s:"Oh my God Annu! Even surprised you look AMAZING!"},
+    {d:"Annu yeh expression bhi itna cute! Kuch bhi karo cute lagta hai! 🥺✨",s:"Annu yeh expression bhi itna cute! Kuch bhi karo cute lagta hai!"},
+    {d:"Surprised Annu = Double cute Annu! 😂💕",s:"Surprised Annu equals double cute Annu!"},
+    {d:"Annu ka surprised face = Mujhe bhi surprise kiya! Kitni cute ho! 🌸",s:"Annu ka surprised face, mujhe bhi surprise kiya! Kitni cute ho!"},
+    {d:"That surprised face just won the cuteness award! 💫",s:"That surprised face just won the cuteness award!"}
+  ],
+  angry:[
+    {d:"Angry Annu bhi pyaari lagti hai! Gussa to hai par cute zaroor! 😅💖",s:"Angry Annu bhi pyaari lagti hai! Gussa to hai par cute zaroor!"},
+    {d:"Annu gussa mat hono! Itni cute ho, gussa suit nahi karta! 🌸",s:"Annu gussa mat hono! Itni cute ho, gussa suit nahi karta!"},
+    {d:"Even angry mode = still most beautiful! 10/10 no debate! 🔥💕",s:"Even angry mode, still most beautiful! 10 out of 10, no debate!"},
+    {d:"Annu ka gussa? Adorable! Sabka cute gussa nahi hota! 😍",s:"Annu ka gussa? Adorable! Sabka cute gussa nahi hota!"},
+    {d:"OK angry face is also cute! Annu sab rules tod deti ho! 💎✨",s:"OK angry face is also cute! Annu sab rules tod deti ho!"}
+  ],
+  fearful:[
+    {d:"Annu darogi mat! Main hoon na! You're safe and beautiful! 💪💖",s:"Annu darogi mat! Main hoon na! You are safe and beautiful!"},
+    {d:"Scared Annu bhi bravest aur cutest hai! 🌸✨",s:"Scared Annu bhi bravest aur cutest hai!"},
+    {d:"Annu don't worry! Smile karo, sab theek ho jayega! 😊💕",s:"Annu don't worry! Smile karo, sab theek ho jayega!"},
+    {d:"Even fearful face is adorable! Annu too cute for this world! 🥺",s:"Even fearful face is adorable! Annu too cute for this world!"},
+    {d:"Annu tum bahut brave ho! And beautiful too! Never forget! 👑💖",s:"Annu tum bahut brave ho! And beautiful too! Never forget!"}
+  ],
+  disgusted:[
+    {d:"Annu yeh expression bhi funny aur cute hai! 😂💖",s:"Annu yeh expression bhi funny aur cute hai!"},
+    {d:"Ajeeb look deke bhi cutest insaan! 🌸✨",s:"Ajeeb look deke bhi cutest insaan!"},
+    {d:"Whatever expression you make, Annu you're still gorgeous! 💅💕",s:"Whatever expression you make, Annu you are still gorgeous!"},
+    {d:"Yaar yeh face bhi cute hai! Annu bohot unfair ho! 😭💖",s:"Yaar yeh face bhi cute hai! Annu bohot unfair ho!"},
+    {d:"Annu's any face > everyone else's best face! Facts! 👑✨",s:"Annu's any face is better than everyone else's best face! That's a fact!"}
+  ],
+  noface:[
+    {d:"Annu kahan ho? Camera ke paas aao! 📸💖",s:"Annu kahan ho? Camera ke paas aao!"},
+    {d:"Come closer Annu! Show me that beautiful face! 🌸",s:"Come closer Annu! Show me that beautiful face!"},
+    {d:"Aye Annu! Apna cute face dikhawo! 😊💕",s:"Aye Annu! Apna cute face dikhawo!"},
+    {d:"Main wait kar raha hun Annu! Camera dekhna! 💖✨",s:"Main wait kar raha hun Annu! Camera ki taraf dekho!"}
+  ]
+};
+
+/* ══════════════════
+   THREE.JS — PAGE 1
+   ══════════════════ */
+function initP1(){
+  const cv=document.getElementById('p1bg');
+  p1s=new THREE.Scene();
+  p1c=new THREE.PerspectiveCamera(70,innerWidth/innerHeight,.1,1000);
+  p1c.position.z=5;
+  p1r=new THREE.WebGLRenderer({canvas:cv,alpha:true,antialias:devicePixelRatio<2});
+  p1r.setSize(innerWidth,innerHeight);
+  p1r.setPixelRatio(Math.min(devicePixelRatio,2));
+  const g=new THREE.BufferGeometry(),N=700;
+  const pos=new Float32Array(N*3),col=new Float32Array(N*3);
+  const pal=[[1,.41,.7],[1,.08,.58],[1,.84,0],[.9,.4,.9],[.7,.85,1]];
+  for(let i=0;i<N;i++){
+    pos[i*3]=(Math.random()-.5)*20;pos[i*3+1]=(Math.random()-.5)*20;pos[i*3+2]=(Math.random()-.5)*12;
+    const c=pal[i%pal.length];col[i*3]=c[0];col[i*3+1]=c[1];col[i*3+2]=c[2];
+  }
+  g.setAttribute('position',new THREE.BufferAttribute(pos,3));
+  g.setAttribute('color',new THREE.BufferAttribute(col,3));
+  p1pts=new THREE.Points(g,new THREE.PointsMaterial({size:.07,vertexColors:true,transparent:true,opacity:.85}));
+  p1s.add(p1pts);
+  for(let i=0;i<6;i++){
+    const t=new THREE.Mesh(
+      new THREE.TorusGeometry(.4+i*.15,.04,8,24),
+      new THREE.MeshBasicMaterial({color:new THREE.Color().setHSL(.9+i*.02,1,.65),transparent:true,opacity:.35})
+    );
+    t.position.set((Math.random()-.5)*8,(Math.random()-.5)*7,(Math.random()-.5)*4);
+    t.userData={iy:t.position.y,ph:Math.random()*6.28,sp:.4+Math.random()*.6};
+    p1s.add(t);
+  }
+  function a(){
+    p1id=requestAnimationFrame(a);
+    const t=Date.now()*.001;
+    p1pts.rotation.y=t*.04;p1pts.rotation.x=t*.025;
+    p1s.children.forEach(o=>{
+      if(o.userData.iy!==undefined){
+        o.position.y=o.userData.iy+Math.sin(t*o.userData.sp+o.userData.ph)*.8;
+        o.rotation.x=t*.8;o.rotation.z=t*.5;
+      }
+    });
+    p1r.render(p1s,p1c);
+  }a();
+}
+
+/* ══════════════════
+   THREE.JS — PAGE 2
+   ══════════════════ */
+function initP2(){
+  const cv=document.getElementById('p2bg');
+  p2s=new THREE.Scene();p2os=[];
+  p2c=new THREE.PerspectiveCamera(70,innerWidth/innerHeight,.1,1000);
+  p2c.position.z=8;
+  p2r=new THREE.WebGLRenderer({canvas:cv,alpha:true,antialias:devicePixelRatio<2});
+  p2r.setSize(innerWidth,innerHeight);
+  p2r.setPixelRatio(Math.min(devicePixelRatio,2));
+  // Stars
+  const sg=new THREE.BufferGeometry(),SN=1200;
+  const sp=new Float32Array(SN*3),sc=new Float32Array(SN*3);
+  const sc2=[[1,.41,.7],[1,.08,.58],[1,.84,0],[1,.7,.85],[1,1,1]];
+  for(let i=0;i<SN;i++){
+    sp[i*3]=(Math.random()-.5)*30;sp[i*3+1]=(Math.random()-.5)*30;sp[i*3+2]=(Math.random()-.5)*12;
+    const c=sc2[i%sc2.length];sc[i*3]=c[0];sc[i*3+1]=c[1];sc[i*3+2]=c[2];
+  }
+  sg.setAttribute('position',new THREE.BufferAttribute(sp,3));
+  sg.setAttribute('color',new THREE.BufferAttribute(sc,3));
+  const stars=new THREE.Points(sg,new THREE.PointsMaterial({size:.055,vertexColors:true,transparent:true,opacity:.8}));
+  p2s.add(stars);p2os.push({o:stars,ry:.015,rx:.008});
+  // Rings
+  for(let i=0;i<10;i++){
+    const m=new THREE.Mesh(
+      new THREE.TorusGeometry(.3+Math.random()*.7,.04,8,28),
+      new THREE.MeshBasicMaterial({color:new THREE.Color().setHSL(.88+Math.random()*.12,1,.7),transparent:true,opacity:.35})
+    );
+    m.position.set((Math.random()-.5)*14,(Math.random()-.5)*12,(Math.random()-.5)*6);
+    m.userData={iy:m.position.y,ph:Math.random()*6.28,fr:.3+Math.random()*.5,rx:.01+Math.random()*.02,rz:.01+Math.random()*.015};
+    p2s.add(m);p2os.push({o:m,isTorus:true});
+  }
+  // Spheres
+  for(let i=0;i<14;i++){
+    const m=new THREE.Mesh(
+      new THREE.SphereGeometry(.04+Math.random()*.12,6,6),
+      new THREE.MeshBasicMaterial({color:new THREE.Color().setHSL(.83+Math.random()*.15,1,.75),transparent:true,opacity:.65})
+    );
+    m.position.set((Math.random()-.5)*16,(Math.random()-.5)*12,-2+Math.random()*4);
+    m.userData={iy:m.position.y,ph:Math.random()*6.28,fr:.2+Math.random()*.6};
+    p2s.add(m);p2os.push({o:m,isSphere:true});
+  }
+  function a(){
+    p2id=requestAnimationFrame(a);
+    const t=Date.now()*.001;
+    p2os.forEach(({o,ry,rx,isTorus,isSphere})=>{
+      if(ry)o.rotation.y+=ry;if(rx)o.rotation.x+=rx;
+      if(isTorus){o.position.y=o.userData.iy+Math.sin(t*o.userData.fr+o.userData.ph)*1.8;o.rotation.x+=o.userData.rx;o.rotation.z+=o.userData.rz;}
+      if(isSphere){o.position.y=o.userData.iy+Math.sin(t*o.userData.fr+o.userData.ph)*1.5;const sc=.7+.5*Math.sin(t*o.userData.fr*2+o.userData.ph);o.scale.setScalar(sc);}
+    });
+    p2c.position.x=Math.sin(t*.08)*.6;p2c.position.y=Math.cos(t*.06)*.4;
+    p2r.render(p2s,p2c);
+  }a();
+}
+
+/* ══════════════════
+   SPARKLE
+   ══════════════════ */
+function sparkle(x,y){
+  ['💖','✨','🌸','💕','⭐','🌟','💗','🎀','💫'].forEach((e,i)=>{
+    const el=document.createElement('div');
+    el.className='sp';el.textContent=e;
+    el.style.left=x+'px';el.style.top=y+'px';
+    const a=(Math.PI*2/9)*i+Math.random()*.3,d=50+Math.random()*90;
+    el.style.setProperty('--dx',Math.cos(a)*d+'px');
+    el.style.setProperty('--dy',Math.sin(a)*d+'px');
+    document.body.appendChild(el);
+    setTimeout(()=>el.remove(),1500);
+  });
+}
+document.addEventListener('click',e=>sparkle(e.clientX,e.clientY));
+document.addEventListener('touchstart',e=>sparkle(e.touches[0].clientX,e.touches[0].clientY),{passive:true});
+
+/* ══════════════════
+   PAGE 1 — COUNTDOWN
+   ══════════════════ */
+function runCountdown(){
+  const el=document.getElementById('countdown');
+  const msg=document.getElementById('msg1');
+  let n=3;
+  function tick(){
+    el.textContent=n;
+    gsap.fromTo(el,{scale:1.6,opacity:.8},{scale:1,opacity:1,duration:.5,ease:'back.out(2)'});
+    speak(String(n));
+    n--;
+    if(n>=0){setTimeout(tick,1200);}
+    else{
+      setTimeout(()=>{
+        el.textContent='💥';
+        gsap.to(el,{scale:3,opacity:0,duration:.9,ease:'expo.out'});
+        if(p1pts){const pa=p1pts.geometry.attributes.position.array;for(let i=0;i<pa.length;i++)pa[i]*=1.8;p1pts.geometry.attributes.position.needsUpdate=true;}
+        gsap.to(msg,{opacity:1,scale:1,rotation:0,duration:1.6,delay:.3,ease:'back.out(2)'});
+        gsap.fromTo(msg,{scale:.8,rotation:-5},{scale:1,rotation:0,duration:1.4,delay:.3,ease:'back.out(2)'});
+        speak("Hello Cutii Annu! Bhaw jada bhad gya hai!",400,.88,1.1);
+        setTimeout(()=>showPage2(),3800);
+      },400);
+    }
+  }
+  setTimeout(tick,800);
+}
+
+/* ══════════════════
+   PAGE 2
+   ══════════════════ */
+function showPage2(){
+  curPg=2;
+  document.getElementById('page1').classList.remove('active');
+  document.getElementById('page2').classList.add('active');
+  if(p1id)cancelAnimationFrame(p1id);
+  p2os=[];initP2();
+  const tl=document.getElementById('gmt'),sub=document.getElementById('gms');
+  const hrt=document.getElementById('gmh'),btn=document.getElementById('bcam');
+  gsap.timeline({delay:.2})
+    .to(tl,{opacity:1,scale:1,rotation:0,duration:1.4,ease:'back.out(2.5)'})
+    .to(sub,{opacity:1,y:0,duration:1,ease:'power3.out'},'-=.5')
+    .to(hrt,{opacity:1,scale:1,duration:.8,ease:'bounce.out'},'-=.4')
+    .to(btn,{opacity:1,y:0,duration:1,ease:'back.out(2)'},'-=.3');
+  gsap.to(hrt,{y:-12,duration:1.8,ease:'sine.inOut',yoyo:true,repeat:-1});
+  speak("Good Morning Cutie Pii! Subah sundar ho jaati hai jab Annu uthti hai!",900);
+}
+
+/* ══════════════════
+   PAGE 3 — CAMERA
+   ══════════════════ */
+function openCamera(){
+  curPg=3;
+  document.getElementById('page2').classList.remove('active');
+  document.getElementById('page3').classList.add('active');
+  document.getElementById('bk').style.display='block';
+  if(p2id)cancelAnimationFrame(p2id);
+  startCam();
+}
+
+async function startCam(){
+  const stat=document.getElementById('stat');
+  const comp=document.getElementById('comp');
+  speak("Camera kholte hain Annu ji!",0,.9,1.05);
+  stat.textContent='Loading AI face detection...';
+  try{
+    const M='https://cdn.jsdelivr.net/npm/@vladmandic/face-api/model';
+    await Promise.all([
+      faceapi.nets.tinyFaceDetector.loadFromUri(M),
+      faceapi.nets.faceExpressionNet.loadFromUri(M)
+    ]);
+    faceOk=true;
+    stat.textContent='AI Ready! Looking for Annu... 👀';
+    speak("AI ready! Ab Annu ka face detect ho sakta hai!",600,.88,1.05);
+  }catch(e){
+    faceOk=false;
+    stat.textContent='AI offline - camera still active!';
+  }
+  try{
+    const stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'user',width:{ideal:480},height:{ideal:360}}});
+    const vid=document.getElementById('vid');
+    vid.srcObject=stream;
+    await new Promise(r=>vid.onloadedmetadata=r);
+    await vid.play();
+    stat.textContent='Camera active! Dekh raha hun Annu ji 👁️';
+    if(faceOk)runDetect(vid);else fallback(comp);
+  }catch(err){
+    stat.textContent='Camera denied. Please allow camera!';
+    comp.textContent='Annu camera permission do please! 🥺💖';
+    speak("Annu camera permission do please!",0,.88,1.1);
+  }
+}
+
+function fallback(el){
+  const all=[...CMP.happy,...CMP.neutral,...CMP.surprised];
+  let i=0;
+  function next(){el.textContent=all[i].d;speak(all[i].s,200);i=(i+1)%all.length;}
+  next();setInterval(next,6000);
+}
+
+async function runDetect(vid){
+  const ov=document.getElementById('ovc');
+  const ctx=ov.getContext('2d');
+  const comp=document.getElementById('comp');
+  const stat=document.getElementById('stat');
+  let frame=0;
+
+  async function loop(){
+    if(!vid.videoWidth){p3id=requestAnimationFrame(loop);return;}
+    ov.width=vid.videoWidth;ov.height=vid.videoHeight;
+    ctx.clearRect(0,0,ov.width,ov.height);
+    frame++;
+
+    // Detect every 18 frames (~2fps detection, smooth 60fps render)
+    if(frame%18===0){
+      try{
+        const det=await faceapi
+          .detectSingleFace(vid,new faceapi.TinyFaceDetectorOptions({inputSize:160,scoreThreshold:0.32}))
+          .withFaceExpressions();
+
+        if(det){
+          stat.textContent='Face found! Analyzing Annu beauty...';
+          const b=det.detection.box;
+          const sx=ov.width/vid.videoWidth,sy=ov.height/vid.videoHeight;
+          const bx=b.x*sx,by=b.y*sy,bw=b.width*sx,bh=b.height*sy;
+
+          // ── Draw detection UI ──
+          ctx.save();
+          // Animated dashed frame
+          ctx.strokeStyle='#ff69b4';ctx.lineWidth=2.5;
+          ctx.shadowColor='#ff69b4';ctx.shadowBlur=18;
+          ctx.setLineDash([10,5]);ctx.lineDashOffset=-(frame*0.6);
+          ctx.strokeRect(bx,by,bw,bh);ctx.setLineDash([]);
+          // Gold corner brackets
+          ctx.strokeStyle='#ffd700';ctx.lineWidth=3.5;ctx.shadowColor='#ffd700';ctx.shadowBlur=12;
+          const cs=Math.min(bw,bh)*.18;
+          [[bx,by+cs,bx,by,bx+cs,by],[bx+bw-cs,by,bx+bw,by,bx+bw,by+cs],
+           [bx,by+bh-cs,bx,by+bh,bx+cs,by+bh],[bx+bw-cs,by+bh,bx+bw,by+bh,bx+bw,by+bh-cs]
+          ].forEach(([x1,y1,x2,y2,x3,y3])=>{ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.lineTo(x3,y3);ctx.stroke();});
+          // Label
+          ctx.shadowBlur=0;
+          ctx.fillStyle='rgba(255,20,147,0.82)';
+          const lh=26,pad=6;
+          ctx.beginPath();
+          ctx.roundRect?ctx.roundRect(bx,by-lh-pad,bw,lh,6):ctx.rect(bx,by-lh-pad,bw,lh);
+          ctx.fill();
+          ctx.fillStyle='#fff';ctx.font=`bold ${Math.max(11,Math.min(14,bw/7))}px Arial`;
+          ctx.textAlign='center';ctx.fillText('Annu Ji',bx+bw/2,by-pad-6);
+          ctx.restore();
+
+          // Expression → compliment
+          const exprs=det.expressions;
+          const top=Object.entries(exprs).sort((a,b2)=>b2[1]-a[1])[0][0];
+          const now=Date.now();
+          // 7 second cooldown between compliments
+          if(now-lastSpkTime>7000){
+            const list=CMP[top]||CMP.neutral;
+            const item=list[Math.floor(Math.random()*list.length)];
+            if(item.s!==lastMsg){
+              lastMsg=item.s;lastSpkTime=now;
+              comp.textContent=item.d;        // show with emoji
+              speak(item.s,100,.88,1.08);     // speak without emoji
+            }
+          }
+        }else{
+          stat.textContent='Looking for Annu... Camera ke paas aao! 👀';
+          if(frame%90===0){
+            const item=CMP.noface[Math.floor(Math.random()*CMP.noface.length)];
+            comp.textContent=item.d;
+            speak(item.s,100,.88,1.05);
+          }
+        }
+      }catch(e){/* ignore per-frame errors */}
+    }
+    p3id=requestAnimationFrame(loop);
+  }
+  loop();
+}
+
+/* ══════════════════
+   BACK / RESIZE
+   ══════════════════ */
+function goBack(){
+  if(curPg===3){
+    document.getElementById('page3').classList.remove('active');
+    document.getElementById('page2').classList.add('active');
+    document.getElementById('bk').style.display='none';
+    if(p3id)cancelAnimationFrame(p3id);
+    const v=document.getElementById('vid');
+    if(v.srcObject)v.srcObject.getTracks().forEach(t=>t.stop());
+    kaStop();speechSynthesis.cancel();
+    curPg=2;p2os=[];initP2();
+    speak("Good Morning Cutie Pii! Wapas aa gayi Annu!",300);
+  }
+}
+
+window.addEventListener('resize',()=>{
+  [[p1r,p1c],[p2r,p2c]].forEach(([r,c])=>{
+    if(!r||!c)return;
+    c.aspect=innerWidth/innerHeight;c.updateProjectionMatrix();
+    r.setSize(innerWidth,innerHeight);
+  });
+});
+
+/* ══════════════════
+   BOOT
+   ══════════════════ */
+async function boot(){
+  const bar=document.getElementById('lb');
+  const ltx=document.getElementById('ltx');
+  const ldr=document.getElementById('ldr');
+  ltx.textContent='Building 3D Universe...';
+  gsap.to(bar,{width:'30%',duration:.7});await new Promise(r=>setTimeout(r,700));
+  ltx.textContent='Adding Stars & Hearts...';
+  gsap.to(bar,{width:'60%',duration:.7});
+  speechSynthesis.getVoices();// preload voice list
+  await new Promise(r=>setTimeout(r,700));
+  ltx.textContent='Almost Ready...';
+  gsap.to(bar,{width:'100%',duration:.5});await new Promise(r=>setTimeout(r,500));
+  gsap.to(ldr,{opacity:0,duration:.8,onComplete:()=>ldr.style.display='none'});
+  initP1();
+  setTimeout(runCountdown,900);
+}
+
+if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',boot);}else{boot();}
+</script>
+</body>
+</html>
